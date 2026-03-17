@@ -2,6 +2,12 @@ from ex0.Card import Rarity
 from ex0.Card import Card
 from ex2.Combatable import Combatable
 from ex2.Magical import Magical
+from enum import Enum
+
+
+class CombatStyle(Enum):
+    MELEE = "melee"
+    RANGED = "distance"
 
 
 class EliteCard(Card, Magical, Combatable):
@@ -10,7 +16,7 @@ class EliteCard(Card, Magical, Combatable):
         name: str,
         cost: int,
         rarity: Rarity,
-        combat_type: str,
+        combat_type: CombatStyle,
         attack_pwr: int,
         defense_pwr: int,
         mana_pool: int,
@@ -44,7 +50,7 @@ class EliteCard(Card, Magical, Combatable):
             "attacker": self.name,
             "target": target.name,
             "damage": self.attack_pwr,
-            "combat_type": self.combat_type
+            "combat_type": self.combat_type.value
         }
 
     def defend(self, incoming_damage: int) -> dict:
