@@ -1,6 +1,6 @@
 from ex0.Card import Card, Rarity
 from ex0.CreatureCard import CreatureCard
-from ex2.EliteCard import EliteCard
+from ex2.EliteCard import EliteCard, CombatStyle
 from ex2.Combatable import Combatable
 from ex2.Magical import Magical
 
@@ -19,7 +19,7 @@ def main() -> None:
     print()
 
     arcane_war = EliteCard("Arcane Warrior", 7, Rarity.LEGENDARY,
-                           "melee", 5, 3, 8, 10, 4)
+                           CombatStyle.MELEE, 5, 3, 8, 10, 4)
     print(f"Playing {arcane_war.name} ({arcane_war.__class__.__name__})")
     enemy = CreatureCard("Enemy", 5, Rarity.UNCOMMON, 5, 7)
     print()
