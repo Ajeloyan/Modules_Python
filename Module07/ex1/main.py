@@ -14,7 +14,10 @@ def main() -> None:
     cards: list[Card] = [
         CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5),
         SpellCard(
-            "Lightning Bolt", 3, Rarity.UNCOMMON, "Deal 3 damage to target"
+            "Lightning Bolt",
+            3,
+            Rarity.UNCOMMON,
+            "damage",
         ),
         ArtifactCard("Mana crystal", 4, Rarity.RARE, 6, "+1 mana per turn"),
     ]
