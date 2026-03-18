@@ -1,5 +1,6 @@
 from ex0.Card import Rarity
 from ex0.CreatureCard import CreatureCard
+import sys
 
 
 def main() -> None:
@@ -9,11 +10,14 @@ def main() -> None:
     print("Testing Abstract Base Class Design:")
     print()
 
-    dragon = CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5)
+    try:
+        dragon = CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5)
 
-    print(f"{dragon.__class__.__name__} Info:")
-    print(dragon.get_card_info())
-
+        print(f"{dragon.__class__.__name__} Info:")
+        print(dragon.get_card_info())
+    except Exception as error:
+        print(error)
+        sys.exit(1)
     game_state = {"available_mana": 6}
     mana_available = game_state["available_mana"]
     print()
