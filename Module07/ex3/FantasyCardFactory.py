@@ -3,7 +3,6 @@ from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 from ex1.ArtifactCard import ArtifactCard
 from ex1.SpellCard import SpellCard
-from typing import Any
 import random
 from ex0.Card import Rarity
 from ex1.SpellCard import SpellEffect
@@ -109,3 +108,41 @@ class FantasyCardFactory(CardFactory):
                                         data["durability"],
                                         data["effect"])
         raise ValueError(f"no artifact card found with {name_or_power}")
+
+    def create_themed_deck(self, size: int) -> dict:
+
+        if size <= 0:
+            return {}
+
+        all_categories: dict[str, list[str]] = self.get_supported_types()
+        available_keys: list[str] = (all_categories["creatures"] +
+                                     all_categories["spells"] +
+                                     all_categories["artifacts"])
+
+        if size <= len(available_keys):
+            chosen_keys = random.sample(available_keys, size)
+        else:
+            chosen_keys = [random.choice(available_keys) for _ in range(size)]
+
+        deck = {}
+        for i, key in enumerate(chosen_keys):
+            if key in self.creatures:
+                card = self.create_creature(key)
+            elif key in self.spells:
+                card = self.create_spell(key)
+            else:
+                card = self.create_artifact(key)
+            deck[f"card_{i+1}"] = card
+
+        return {
+            "theme": "Fantasy",
+            "size": size,
+            "content": deck
+        }
+
+    def get_supported_types(self) -> dict:
+        return {
+            "creatures": list(self.creatures.keys()),
+            "spells": list(self.spells.keys()),
+            "artifacts": list(self.artifacts.keys())
+        }
