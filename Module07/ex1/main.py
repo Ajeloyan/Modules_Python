@@ -4,6 +4,7 @@ from ex1.Deck import Deck
 from ex0.CreatureCard import CreatureCard
 from ex0.Card import Rarity
 from ex0.Card import Card
+import sys
 
 
 def main() -> None:
@@ -11,19 +12,23 @@ def main() -> None:
     print()
 
     game_state = {"available_mana": 10}
-    cards: list[Card] = [
-        CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5),
-        SpellCard(
-            "Lightning Bolt",
-            3,
-            Rarity.UNCOMMON,
-            "damage",
-        ),
-        ArtifactCard("Mana crystal", 4, Rarity.RARE, 6, "+1 mana per turn"),
-    ]
-    deck = Deck()
-    for card in cards:
-        deck.add_card(card)
+    try:
+        cards: list[Card] = [
+            CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5),
+            SpellCard(
+                "Lightning Bolt",
+                3,
+                Rarity.UNCOMMON,
+                "damage",
+            ),
+            ArtifactCard("Mana crystal", 4, Rarity.RARE, 6, "+1 mana per turn"),
+        ]
+        deck = Deck()
+        for card in cards:
+            deck.add_card(card)
+    except Exception as e:
+        print(e)
+        sys.exit(1)
 
     print("Building deck with different card types...")
     print(f"Deck stats: {deck.get_deck_stats()}")
