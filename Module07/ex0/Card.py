@@ -12,6 +12,8 @@ class Rarity(Enum):
 class Card(ABC):
     def __init__(self, name: str, cost: int, rarity: Rarity) -> None:
         self.name = name
+        if not isinstance(cost, int) or cost <= 0:
+            raise ValueError("Cost must be a positive integer")
         self.cost = cost
         self.rarity = rarity
 
