@@ -6,7 +6,7 @@ class GameEngine:
     def configure_engine(
         self, factory: CardFactory, strategy: GameStrategy
     ) -> None:
-        pass
+        self
 
     def simulate_turn(self) -> dict:
         pass
