@@ -33,12 +33,14 @@ class FantasyCardFactory(CardFactory):
                 "cost": 4,
                 "rarity": Rarity.UNCOMMON,
                 "effect_type": SpellEffect.DAMAGE,
+                "power": 4
             },
             "lightning": {
                 "name": "Lightning Bolt",
                 "cost": 3,
                 "rarity": Rarity.UNCOMMON,
                 "effect_type": SpellEffect.DAMAGE,
+                "power": 4
             }
         }
 
@@ -78,7 +80,8 @@ class FantasyCardFactory(CardFactory):
             return SpellCard(data["name"],
                              data["cost"],
                              data["rarity"],
-                             data['effect_type'])
+                             data['effect_type'],
+                             data["power"])
 
         if isinstance(name_or_power, int):
             for data in self.spells.values():
@@ -86,7 +89,8 @@ class FantasyCardFactory(CardFactory):
                     return SpellCard(data["name"],
                                      data["cost"],
                                      data["rarity"],
-                                     data['effect_type'])
+                                     data['effect_type'],
+                                     data["power"])
 
         raise ValueError(f"no spell card found with {name_or_power}")
 

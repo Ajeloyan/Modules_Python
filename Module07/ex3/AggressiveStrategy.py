@@ -8,23 +8,28 @@ class AgressiveStrategy(GameStrategy):
         super().__init__()
 
     def execute_turn(self, hand: list, battlefield: list) -> dict:
+        remaining_mana = 10
         turn_report = {
             "cards_played": [],
             "mana_used": 0,
             "damage_dealt": 0,
-            "targets_hit": []
+            "targets_attacked": []
         }
 
-        def get_cost(card): return getattr(card, "cost", 0)
+        def get_cost(card):
+            return getattr(card, "cost", 0)
         sorted_hand = sorted(hand, key=get_cost)
 
         current_count = len([c for c in battlefield if
                              isinstance(c, CreatureCard)])
 
         for card in sorted_hand:
+            if card.cost > remaining_mana or card.cost > remaining_mana:
+                continue
             if isinstance(card, CreatureCard) and current_count < 5:
                 turn_report["cards_played"].append(card.name)
                 turn_report["mana_used"] += card.cost
+                remaining_mana -= card.cost
                 current_count += 1
 
                 targets = self.prioritize_targets(battlefield)
@@ -33,15 +38,20 @@ class AgressiveStrategy(GameStrategy):
                     attack_results = card.attack_target(target)
                     turn_report["damage_dealt"] += \
                         attack_results.get("damage_dealt", 0)
-                    turn_report["targets_hit"].append(target.name)
+                    if target.name not in turn_report["targets_attacked"]:
+                        turn_report["targets_attacked"].append(target.name)
 
             elif isinstance(card, SpellCard):
                 turn_report["cards_played"].append(card.name)
                 turn_report["mana_used"] += card.cost
+                remaining_mana -= card.cost
+                turn_report["damage_dealt"] += getattr(card, "power", 0)
+                if "Enemy Player" not in turn_report["targets_attacked"]:
+                    turn_report["targets_attacked"].append("Enemy Player")
         return turn_report
 
     def get_strategy_name(self) -> str:
-        return "Aggressive Strategy"
+        return "AggressiveStrategy"
 
     def prioritize_targets(self, available_targets: list) -> list:
 
