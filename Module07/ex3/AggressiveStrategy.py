@@ -1,6 +1,7 @@
 from ex3.GameStrategy import GameStrategy
 from ex0.CreatureCard import CreatureCard
 from ex1.SpellCard import SpellCard
+from typing import Any
 
 
 class AgressiveStrategy(GameStrategy):
@@ -9,7 +10,7 @@ class AgressiveStrategy(GameStrategy):
 
     def execute_turn(self, hand: list, battlefield: list) -> dict:
         remaining_mana = 10
-        turn_report = {
+        turn_report: dict[str, Any] = {
             "cards_played": [],
             "mana_used": 0,
             "damage_dealt": 0,

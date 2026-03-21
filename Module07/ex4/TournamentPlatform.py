@@ -3,7 +3,7 @@ from ex4.TournamentCard import TournamentCard
 
 class TournamentPlatform():
     def __init__(self) -> None:
-        self.cards = {}
+        self.cards: dict[str, TournamentCard] = {}
         self.match_played = 0
 
     def register_card(self, card: TournamentCard) -> str:

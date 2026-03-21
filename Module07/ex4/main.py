@@ -1,6 +1,7 @@
 from ex0.Card import Rarity
 from ex4.TournamentCard import TournamentCard
 from ex4.TournamentPlatform import TournamentPlatform
+import sys
 
 
 def main() -> None:
@@ -64,6 +65,7 @@ def main() -> None:
     except (ValueError, KeyError) as e:
         print(f"\n[CRITICAL ERROR] {e}")
         print("Platform deployment aborted.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

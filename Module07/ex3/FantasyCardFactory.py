@@ -6,11 +6,12 @@ from ex1.SpellCard import SpellCard
 import random
 from ex0.Card import Rarity
 from ex1.SpellCard import SpellEffect
+from typing import Any
 
 
 class FantasyCardFactory(CardFactory):
     def __init__(self) -> None:
-        self.creatures = {
+        self.creatures: dict[str, dict[str, Any]] = {
             "dragon": {
                 "name": "Fire Dragon",
                 "cost": 5,
@@ -27,7 +28,7 @@ class FantasyCardFactory(CardFactory):
             },
         }
 
-        self.spells = {
+        self.spells: dict[str, dict[str, Any]] = {
             "fireball": {
                 "name": "Fireball",
                 "cost": 4,
@@ -44,7 +45,7 @@ class FantasyCardFactory(CardFactory):
             }
         }
 
-        self.artifacts = {
+        self.artifacts: dict[str, dict[str, Any]] = {
             "amulet": {
                 "name": "Amulet of Vigor",
                 "cost": 3,

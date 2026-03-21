@@ -3,6 +3,7 @@ from ex3.AggressiveStrategy import AgressiveStrategy
 from ex0.CreatureCard import CreatureCard
 from ex3.GameEngine import GameEngine
 from ex0.Card import Rarity
+import sys
 
 
 def main() -> None:
@@ -52,10 +53,13 @@ def main() -> None:
               "flexibility achieved!")
     except ValueError as e:
         print(f"\n[Configuration Error] Invalid data provided: {e}")
+        sys.exit(1)
     except KeyError as e:
         print(f"\n[Logic Error] Missing data in turn result: {e}")
+        sys.exit(1)
     except Exception as e:
         print(f"\n[Unexpected Error] The engine crashed: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

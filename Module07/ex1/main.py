@@ -3,7 +3,6 @@ from ex1.SpellCard import SpellCard
 from ex1.Deck import Deck
 from ex0.CreatureCard import CreatureCard
 from ex0.Card import Rarity
-from ex0.Card import Card
 import sys
 
 
@@ -13,15 +12,22 @@ def main() -> None:
 
     game_state = {"available_mana": 10}
     try:
-        cards: list[Card] = [
-            CreatureCard("Fire dragon", 5, Rarity.LEGENDARY, 7, 5),
-            SpellCard(
-                "Lightning Bolt",
-                3,
-                Rarity.UNCOMMON,
-                "damage",
-            ),
-            ArtifactCard("Mana crystal", 4, Rarity.RARE, 6, "+1 mana per turn"),
+        cards: list = [
+            CreatureCard("Fire dragon",
+                         5,
+                         Rarity.LEGENDARY,
+                         7,
+                         5),
+            SpellCard("Lightning Bolt",
+                      3,
+                      Rarity.UNCOMMON,
+                      "damage",
+                      4),
+            ArtifactCard("Mana crystal",
+                         4,
+                         Rarity.RARE,
+                         6,
+                         "+1 mana per turn"),
         ]
         deck = Deck()
         for card in cards:

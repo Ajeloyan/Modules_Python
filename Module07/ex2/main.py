@@ -21,7 +21,7 @@ def main() -> None:
 
     try:
         arcane_war = EliteCard("Arcane Warrior", 7, Rarity.LEGENDARY,
-                           CombatStyle.MELEE, 5, 3, 8, 10, 4)
+                               CombatStyle.MELEE, 5, 3, 8, 10, 4)
         print(f"Playing {arcane_war.name} ({arcane_war.__class__.__name__})")
         enemy = CreatureCard("Enemy", 5, Rarity.UNCOMMON, 5, 7)
     except Exception as e:

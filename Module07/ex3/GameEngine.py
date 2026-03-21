@@ -1,5 +1,6 @@
 from ex3.CardFactory import CardFactory
 from ex3.GameStrategy import GameStrategy
+from ex0.Card import Card
 
 
 class GameEngine:
@@ -9,7 +10,7 @@ class GameEngine:
         self.factory = factory
         self.strategy = strategy
         self.hand = []
-        self.battlefield = []
+        self.battlefield: list[Card] = []
         self.game_state = {"available_mana": 10,
                            "turn_count": 0,
                            "max_mana": 10
@@ -28,7 +29,7 @@ class GameEngine:
 
         for card in self.battlefield:
             if hasattr(card, "has_attacked"):
-                card.has_attacked = False
+                setattr(card, "has_attacked", False)
 
         if self.deck:
             self.hand.append(self.deck.pop())
