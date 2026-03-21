@@ -10,44 +10,52 @@ def main() -> None:
     print()
     print("Configuring Fantasy Card Game...")
 
-    factory = FantasyCardFactory()
-    strategy = AgressiveStrategy()
-    engine = GameEngine()
+    try:
+        factory = FantasyCardFactory()
+        strategy = AgressiveStrategy()
+        engine = GameEngine()
 
-    engine.configure_engine(factory, strategy)
+        engine.configure_engine(factory, strategy)
 
-    print(f"Factory: {factory.__class__.__name__}")
-    print(f"Strategy: {strategy.__class__.__name__}")
-    print(f"Available types: {factory.get_supported_types()}")
-    print()
+        print(f"Factory: {factory.__class__.__name__}")
+        print(f"Strategy: {strategy.__class__.__name__}")
+        print(f"Available types: {factory.get_supported_types()}")
+        print()
 
-    enemy = CreatureCard("Enemy Player", 3, Rarity.COMMON, 3, 10)
-    engine.battlefield = [enemy]
+        enemy = CreatureCard("Enemy Player", 3, Rarity.COMMON, 3, 10)
+        engine.battlefield = [enemy]
 
-    print("Simulating aggressive turn...")
+        print("Simulating aggressive turn...")
 
-    hand_str = ", ".join([f"{c.name} ({c.cost})" for c in engine.hand])
-    print(f"Hand: [{hand_str}]")
-    print()
+        hand_str = ", ".join([f"{c.name} ({c.cost})" for c in engine.hand])
+        print(f"Hand: [{hand_str}]")
+        print()
 
-    print("Turn execution:")
-    turn_result = engine.simulate_turn()
+        print("Turn execution:")
+        turn_result = engine.simulate_turn()
 
-    print(f"Strategy: {strategy.get_strategy_name()}")
-    print(f"Actions: {turn_result['report']}")
-    print()
-    print("Game Report:")
+        print(f"Strategy: {strategy.get_strategy_name()}")
+        print(f"Actions: {turn_result['report']}")
+        print()
+        print("Game Report:")
 
-    report = {
-        "turns_simulated": turn_result["turn"],
-        "strategy_used": strategy.get_strategy_name(),
-        "total_damage": turn_result["report"]["damage_dealt"],
-        "cards_created": len(engine.hand) + len(engine.battlefield)
-        + len(engine.deck)
-    }
-    print(report)
-    print()
-    print("Abstract Factory + Strategy Pattern: Maximum flexibility achieved!")
+        report = {
+            "turns_simulated": turn_result["turn"],
+            "strategy_used": strategy.get_strategy_name(),
+            "total_damage": turn_result["report"]["damage_dealt"],
+            "cards_created": len(engine.hand) + len(engine.battlefield)
+            + len(engine.deck)
+        }
+        print(report)
+        print()
+        print("Abstract Factory + Strategy Pattern: Maximum "
+              "flexibility achieved!")
+    except ValueError as e:
+        print(f"\n[Configuration Error] Invalid data provided: {e}")
+    except KeyError as e:
+        print(f"\n[Logic Error] Missing data in turn result: {e}")
+    except Exception as e:
+        print(f"\n[Unexpected Error] The engine crashed: {e}")
 
 
 if __name__ == "__main__":
